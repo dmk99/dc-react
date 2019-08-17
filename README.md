@@ -1,5 +1,7 @@
 # @david.kucsai/dc-react
 
+**This project is still a WIP.**
+
 The goal of this library is to provide a React-styled wrapper around the great DC.js library.
 
 [![npm version](http://img.shields.io/npm/v/@david.kucsai/dc-react.svg?style=flat)](https://npmjs.org/package/@david.kucsai/dc-react "View this project on npm")
@@ -18,6 +20,28 @@ You will need:
 ```
 
 ## Documentation
+
+### Notes
+
+- Refer to [DC.js documentation](http://dc-js.github.io/dc.js/docs/html/index.html) for the associated properties on most of the charts.
+    - Generally properties will have the same name as the original documentation.
+    - There are a few extra properties which have been added that hook into underlying DC.js properties. These are the following (which can be found in `src/props/BaseProps.ts`)
+        - Event Listeners. Corresponds with the `on` function calls:
+            ```typescript
+                onRenderlet?: (chart: AllDcCharts, filter: any) => void;
+                onPretransition?: (chart: AllDcCharts, filter: any) => void;
+                onPreRender?: (chart: AllDcCharts) => void;
+                onPostRender?: (chart: AllDcCharts) => void;
+                onPreRedraw?: (chart: AllDcCharts) => void;
+                onFiltered?: (chart: AllDcCharts, filter: any) => void;
+                onZoomed?: (chart: AllDcCharts, filter: any) => void;
+            ```
+        
+        - Chart reference. This will return the chart reference once the component is mounted. Use this to call `filterAll()` or any other relevant functions. 
+            ```typescript
+                  getChart?: (chart: AllDcCharts) => void;
+            ```
+        
 
 ### Status
 
