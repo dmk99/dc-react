@@ -22,7 +22,7 @@ You will need:
 ### Status
 
 A marked checkbox indicates that all the setter props have been specified in the component props.
-Which indicates that it should be functionally complete.
+Which indicates that all the settable properties have been added to the property definitions.
 
 - [x] DataCount
 - [x] DataGrid
