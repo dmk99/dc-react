@@ -1,7 +1,7 @@
-import BaseChart from "./BaseChart";
 import { CoordinateGridProps } from "./props/CoordinateGridProps";
 import { StackProps } from "./props/StackProps";
 import { CurveFactory } from "d3-shape";
+import * as React from "react";
 interface LineChartProps extends CoordinateGridProps, StackProps {
     curve?: CurveFactory;
     dashStyle?: number[];
@@ -13,7 +13,9 @@ interface LineChartProps extends CoordinateGridProps, StackProps {
     tension?: number;
     xyTipsOn?: boolean;
 }
-export default class LineChart extends BaseChart<LineChartProps> {
-    componentDidMount(): void;
+export default class LineChart extends React.PureComponent<LineChartProps> {
+    private setChart;
+    private onChartMounted;
+    render(): JSX.Element;
 }
 export {};

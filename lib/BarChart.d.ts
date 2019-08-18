@@ -1,6 +1,6 @@
-import BaseChart from "./BaseChart";
 import { CoordinateGridProps } from "./props/CoordinateGridProps";
 import { StackProps } from "./props/StackProps";
+import * as React from "react";
 interface BarChartProps extends CoordinateGridProps, StackProps {
     alwaysUseRounding?: boolean;
     barPadding?: number;
@@ -8,7 +8,8 @@ interface BarChartProps extends CoordinateGridProps, StackProps {
     gap?: number;
     outerPadding?: number;
 }
-export default class BarChart extends BaseChart<BarChartProps> {
-    componentDidMount(): void;
+export default class BarChart extends React.PureComponent<BarChartProps> {
+    private setChart;
+    render(): JSX.Element;
 }
 export {};

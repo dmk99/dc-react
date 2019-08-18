@@ -1,5 +1,5 @@
-import BaseChart from "./BaseChart";
 import { CoordinateGridProps } from "./props/CoordinateGridProps";
+import * as React from "react";
 interface BoxPlotProps extends Pick<CoordinateGridProps, Exclude<keyof CoordinateGridProps, "x">> {
     boldOutlier?: boolean;
     boxPadding?: number;
@@ -14,7 +14,8 @@ interface BoxPlotProps extends Pick<CoordinateGridProps, Exclude<keyof Coordinat
     }) => string;
     yRangePadding?: number | (() => number);
 }
-export default class BoxPlot extends BaseChart<BoxPlotProps> {
-    componentDidMount(): void;
+export default class BoxPlot extends React.PureComponent<BoxPlotProps> {
+    private setChart;
+    render(): JSX.Element;
 }
 export {};

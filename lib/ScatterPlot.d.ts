@@ -1,6 +1,6 @@
-import BaseChart from "./BaseChart";
 import { Scale } from "dc";
 import { CoordinateGridProps } from "./props/CoordinateGridProps";
+import * as React from "react";
 import { SymbolType } from "d3-shape";
 import { DatumValueAccessor } from "./DataTable";
 interface ScatterPlotProps extends CoordinateGridProps {
@@ -17,7 +17,8 @@ interface ScatterPlotProps extends CoordinateGridProps {
     symbol?: SymbolType;
     symbolSize?: number;
 }
-export default class ScatterPlot extends BaseChart<ScatterPlotProps> {
-    componentDidMount(): void;
+export default class ScatterPlot extends React.PureComponent<ScatterPlotProps> {
+    private setChart;
+    render(): JSX.Element;
 }
 export {};

@@ -1,6 +1,6 @@
-import BaseChart from "./BaseChart";
 import { BaseProps } from "./props/BaseProps";
 import { SortingFunction } from "./DataTable";
+import * as React from "react";
 interface CboxMenuProps extends BaseProps {
     filterDisplayed?: () => boolean;
     multiple?: boolean;
@@ -8,7 +8,8 @@ interface CboxMenuProps extends BaseProps {
     promptText?: string;
     promptValue?: any;
 }
-export default class CboxMenu extends BaseChart<CboxMenuProps> {
-    componentDidMount(): void;
+export default class CboxMenu extends React.PureComponent<CboxMenuProps> {
+    private setChart;
+    render(): JSX.Element;
 }
 export {};

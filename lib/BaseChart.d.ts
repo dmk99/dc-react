@@ -1,8 +1,7 @@
 import * as React from "react";
-import { AllDcCharts } from "./props/BaseProps";
-export default class BaseChart<P> extends React.PureComponent<P> {
+import { AllDcCharts, BaseProps } from "./props/BaseProps";
+export default class BaseChart<P extends BaseProps> extends React.PureComponent<P> {
     readonly ChartEventKeys: string[];
-    readonly DcReactBaseKeys: string[];
     protected chart: AllDcCharts;
     protected chartRef: any;
     componentDidMount(): void;

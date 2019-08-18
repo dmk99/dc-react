@@ -1,4 +1,4 @@
-import BaseChart from "./BaseChart";
+import * as React from "react";
 import { BaseProps } from "./props/BaseProps";
 import { ColorProps } from "./props/ColorProps";
 import { MarginProps } from "./props/MarginProps";
@@ -16,7 +16,8 @@ interface HeatMapChartProps extends BaseProps, ColorProps, MarginProps {
     yAxisOnClick?: (d: any) => void;
     yBorderRadius?: number;
 }
-export default class HeatMap extends BaseChart<HeatMapChartProps> {
-    componentDidMount(): void;
+export default class HeatMap extends React.PureComponent<HeatMapChartProps> {
+    private setChart;
+    render(): JSX.Element;
 }
 export {};

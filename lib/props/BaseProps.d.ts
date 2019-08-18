@@ -12,7 +12,8 @@ export interface ChartEventProps {
     onZoomed?: (chart: AllDcCharts, filter: any) => void;
 }
 export interface DcReactBaseProps {
-    getChart?: (chart: AllDcCharts) => void;
+    onChartMounted?: (chart: AllDcCharts) => void;
+    setChartRef?: (ref: any, chartGroup?: string) => AllDcCharts;
 }
 export interface BaseProps extends ChartEventProps, DcReactBaseProps {
     crossfilter?: Crossfilter<any>;

@@ -1,4 +1,4 @@
-import BaseChart from "./BaseChart";
+import * as React from "react";
 import { BaseProps } from "./props/BaseProps";
 import { ColorProps } from "./props/ColorProps";
 import { CapProps } from "./props/CapProps";
@@ -11,7 +11,8 @@ interface SunburstChartProps extends BaseProps, ColorProps, CapProps {
     minAngleForLabel?: number;
     radius?: number;
 }
-export default class SunburstChart extends BaseChart<SunburstChartProps> {
-    componentDidMount(): void;
+export default class SunburstChart extends React.PureComponent<SunburstChartProps> {
+    private setChart;
+    render(): JSX.Element;
 }
 export {};

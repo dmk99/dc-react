@@ -1,5 +1,5 @@
-import BaseChart from "./BaseChart";
 import { BaseProps, DatumToStringAccessor } from "./props/BaseProps";
+import * as React from "react";
 interface DataCountProps extends Pick<BaseProps, Exclude<keyof BaseProps, "group" | "dimension">> {
     formatNumber?: DatumToStringAccessor;
     html?: {
@@ -7,7 +7,8 @@ interface DataCountProps extends Pick<BaseProps, Exclude<keyof BaseProps, "group
         some: string;
     };
 }
-export default class DataCount extends BaseChart<DataCountProps> {
-    componentDidMount(): void;
+export default class DataCount extends React.PureComponent<DataCountProps> {
+    private setChart;
+    render(): JSX.Element;
 }
 export {};
