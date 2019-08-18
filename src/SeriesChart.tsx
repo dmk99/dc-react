@@ -5,6 +5,7 @@ import {CompositeChartProps} from "./CompositeChart";
 interface SeriesProps extends CompositeChartProps {
 }
 
+// @ts-ignore
 export default class SeriesChart extends BaseChart<SeriesProps> {
     componentDidMount(): void {
         this.chart = seriesChart(this.chartRef);

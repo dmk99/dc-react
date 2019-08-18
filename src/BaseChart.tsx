@@ -1,10 +1,10 @@
 import * as React from "react";
-import {AllDcCharts, ChartEventProps, DcReactBaseProps} from "./props/BaseProps";
+import {AllDcCharts, BaseProps, ChartEventProps, DcReactBaseProps} from "./props/BaseProps";
 
 /**
  * Exposes the baseMixin properties. All charts should inherit from this.
  */
-export default class BaseChart<P> extends React.PureComponent<P> {
+export default class BaseChart<P extends BaseProps> extends React.PureComponent<P> {
     readonly ChartEventKeys = Object.keys({
         onFiltered: undefined,
         onPostRender: undefined,

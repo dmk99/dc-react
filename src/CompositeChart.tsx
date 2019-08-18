@@ -18,6 +18,7 @@ export interface CompositeChartProps extends Pick<CoordinateGridProps, Exclude<k
     charts: (parentChart: any) => AllDcCharts[];
 }
 
+// @ts-ignore
 export default class CompositeChart extends BaseChart<CompositeChartProps> {
     componentDidMount(): void {
         this.chart = compositeChart(this.chartRef);
