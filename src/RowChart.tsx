@@ -5,6 +5,7 @@ import {CapProps} from "./props/CapProps";
 import {ColorProps} from "./props/ColorProps";
 import {BaseProps} from "./props/BaseProps";
 import {Axis} from "d3-axis";
+import * as React from "react";
 
 interface RowChartProps extends CapProps, MarginProps, ColorProps, BaseProps {
     elasticX?: boolean;
@@ -19,12 +20,18 @@ interface RowChartProps extends CapProps, MarginProps, ColorProps, BaseProps {
     xAxis?: Axis<any>;
 }
 
-export default class RowChart extends BaseChart<RowChartProps> {
-    componentDidMount(): void {
-        this.chart = rowChart(this.chartRef);
+export default class RowChart extends React.PureComponent<RowChartProps> {
+    private setChart = (r, cg) => {
+        return rowChart(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            // @ts-ignore
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

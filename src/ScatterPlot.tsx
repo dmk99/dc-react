@@ -21,12 +21,18 @@ interface ScatterPlotProps extends CoordinateGridProps {
     symbolSize?: number;
 }
 
-export default class ScatterPlot extends BaseChart<ScatterPlotProps> {
-    componentDidMount(): void {
-        this.chart = scatterPlot(this.chartRef);
+export default class ScatterPlot extends React.PureComponent<ScatterPlotProps> {
+    private setChart = (r, cg) => {
+        return scatterPlot(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            // @ts-ignore
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

@@ -16,12 +16,17 @@ interface BoxPlotProps extends Pick<CoordinateGridProps, Exclude<keyof Coordinat
     yRangePadding?: number | (() => number);
 }
 
-export default class BoxPlot extends BaseChart<BoxPlotProps> {
-    componentDidMount(): void {
-        this.chart = boxPlot(this.chartRef);
+export default class BoxPlot extends React.PureComponent<BoxPlotProps> {
+    private setChart = (r, cg) => {
+        return boxPlot(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

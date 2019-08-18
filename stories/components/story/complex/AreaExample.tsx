@@ -22,7 +22,7 @@ export default class AreaExample extends React.Component<void, AreaExampleState>
     }
 
     componentDidMount() {
-        const experiments = require("./data/morley.csv");
+        const experiments = require("../../../data/morley.csv");
 
         experiments.forEach((x) => {
             x.Speed = +x.Speed;

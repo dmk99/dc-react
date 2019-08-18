@@ -18,12 +18,17 @@ interface PieChartProps extends CapProps, ColorProps, BaseProps {
     slicesCap?: number;
 }
 
-export default class PieChart extends BaseChart<PieChartProps> {
-    componentDidMount(): void {
-        this.chart = pieChart(this.chartRef);
+export default class PieChart extends React.PureComponent<PieChartProps> {
+    private setChart = (r, cg) => {
+        return pieChart(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        );
     }
 }

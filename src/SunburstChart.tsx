@@ -16,12 +16,18 @@ interface SunburstChartProps extends BaseProps, ColorProps, CapProps {
     radius?: number;
 }
 
-export default class SunburstChart extends BaseChart<SunburstChartProps> {
-    componentDidMount(): void {
-        this.chart = sunburstChart(this.chartRef);
+export default class SunburstChart extends React.PureComponent<SunburstChartProps> {
+    private setChart = (r, cg) => {
+        return sunburstChart(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            // @ts-ignore
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

@@ -8,12 +8,17 @@ interface BubbleOverlayProps extends BaseProps, BubbleProps {
     // TODO
 }
 
-export default class BubbleChart extends BaseChart<BubbleOverlayProps> {
-    componentDidMount(): void {
-        this.chart = bubbleOverlayChart(this.chartRef);
+export default class BubbleChart extends React.PureComponent<BubbleOverlayProps> {
+    private setChart = (r, cg) => {
+        return bubbleOverlayChart(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

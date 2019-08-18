@@ -1,6 +1,7 @@
 import BaseChart from "./BaseChart";
 import {BaseProps, DatumToStringAccessor} from "./props/BaseProps";
 import {numberDisplay} from "dc";
+import * as React from "react";
 
 interface NumberDisplayProps extends BaseProps {
     formatNumber?: DatumToStringAccessor;
@@ -11,12 +12,18 @@ interface NumberDisplayProps extends BaseProps {
     }
 }
 
-export default class NumberDisplay extends BaseChart<NumberDisplayProps> {
-    componentDidMount(): void {
-        this.chart = numberDisplay(this.chartRef);
+export default class NumberDisplay extends React.PureComponent<NumberDisplayProps> {
+    private setChart = (r, cg) => {
+        return numberDisplay(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            // @ts-ignore
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

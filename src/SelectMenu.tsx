@@ -2,6 +2,7 @@ import BaseChart from "./BaseChart";
 import {BaseProps} from "./props/BaseProps";
 import {selectMenu} from "dc";
 import {SortingFunction} from "./DataTable";
+import * as React from "react";
 
 interface SelectMenuProps extends BaseProps {
     filterDisplayed?: () => boolean;
@@ -12,12 +13,18 @@ interface SelectMenuProps extends BaseProps {
     promptValue?: any;
 }
 
-export default class SelectMenu extends BaseChart<SelectMenuProps> {
-    componentDidMount(): void {
-        this.chart = selectMenu(this.chartRef);
+export default class SelectMenu extends React.PureComponent<SelectMenuProps> {
+    private setChart = (r, cg) => {
+        return selectMenu(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            // @ts-ignore
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

@@ -2,6 +2,7 @@ import BaseChart from "./BaseChart";
 import {BaseProps} from "./props/BaseProps";
 // @ts-ignore
 import {textFilterWidget} from "dc";
+import * as React from "react";
 
 interface TextFilterWidgetProps extends BaseProps {
     filterFunctionFactory?: (query: string) => (data: string) => void;
@@ -9,12 +10,18 @@ interface TextFilterWidgetProps extends BaseProps {
     placeHolder?: string;
 }
 
-export default class TextFilterWidget extends BaseChart<TextFilterWidgetProps> {
-    componentDidMount(): void {
-        this.chart = textFilterWidget(this.chartRef);
+export default class TextFilterWidget extends React.PureComponent<TextFilterWidgetProps> {
+    private setChart = (r, cg) => {
+        return textFilterWidget(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            // @ts-ignore
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

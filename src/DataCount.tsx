@@ -1,6 +1,7 @@
 import BaseChart from "./BaseChart";
 import {BaseProps, DatumToStringAccessor} from "./props/BaseProps";
 import {dataCount} from "dc";
+import * as React from "react";
 
 // @ts-ignore
 interface DataCountProps extends Pick<BaseProps, Exclude<keyof BaseProps, "group" | "dimension">> {
@@ -11,13 +12,18 @@ interface DataCountProps extends Pick<BaseProps, Exclude<keyof BaseProps, "group
     }
 }
 
-// @ts-ignore
-export default class DataCount extends BaseChart<DataCountProps> {
-    componentDidMount(): void {
-        this.chart = dataCount(this.chartRef);
+export default class DataCount extends React.PureComponent<DataCountProps> {
+    private setChart = (r, cg) => {
+        return dataCount(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            // @ts-ignore
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

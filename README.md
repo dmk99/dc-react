@@ -37,10 +37,10 @@ You will need:
                 onZoomed?: (chart: AllDcCharts, filter: any) => void;
             ```
         
-        - Chart reference. This will return the chart reference once the component is mounted. Use this to call `filterAll()` or any other relevant functions. 
-            ```typescript
-                  getChart?: (chart: AllDcCharts) => void;
-            ```
+        - `onChartMounted: (chart: AllDcCharts) => void`
+            - Called when the chart is mounted. The `chart` parameter is underlying DC chart implementation. This can be used to call methods directly on the chart.
+        - `setChartRef: (ref: any, chartGroup?: string) => AllDcCharts`
+            - Called to create the underlying DC chart. `ref` corresponds to the parent.
         
 
 ### Status

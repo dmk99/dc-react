@@ -26,8 +26,8 @@ export default class CompositeExample extends React.Component<void, CompositeExa
     }
 
     componentDidMount() {
-        const morley = require("./data/morley.csv");
-        const morley2 = require("./data/morley2.csv");
+        const morley = require("../../../data/morley.csv");
+        const morley2 = require("../../../data/morley2.csv");
 
         const exp1 = morley;
         const exp2 = morley2;

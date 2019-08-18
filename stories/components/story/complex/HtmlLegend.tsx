@@ -42,7 +42,7 @@ export default class HtmlLegend extends React.PureComponent {
                     WIP
                 </h1>
                 <h3>
-                    Setting the legend prop seems to cause issues when filtering on subsequent charts.
+                    There's an issue where using the legends causes other filtering to stop working on other charts.
                 </h3>
 
                 <br/>
@@ -73,12 +73,11 @@ export default class HtmlLegend extends React.PureComponent {
                     }}
                 >
                     <PieChart
-                        width={200}
-                        height={300}
-                        cy={100}
+                        width={300}
+                        height={250}
                         dimension={nameDim}
                         group={nameGroup}
-                        legend={legend().x(0).y(10).itemHeight(13).gap(5)}
+                        legend={legend().y(190).autoItemWidth(true).horizontal(true)}
                     />
                 </div>
             </div>

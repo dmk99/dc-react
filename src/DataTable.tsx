@@ -22,12 +22,18 @@ interface DataTableProps extends BaseProps {
     sortBy?: DatumValueAccessor;
 }
 
-export default class DataTable extends BaseChart<DataTableProps> {
-    componentDidMount(): void {
-        this.chart = dataTable(this.chartRef);
+export default class DataTable extends React.PureComponent<DataTableProps> {
+    private setChart = (r, cg) => {
+        return dataTable(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            // @ts-ignore
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

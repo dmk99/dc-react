@@ -21,7 +21,7 @@ export default class BoxPlotBasicExample extends React.Component<void, BoxPlotBa
     }
 
     componentDidMount() {
-        const experiments = require("./data/morley.csv");
+        const experiments = require("../../../data/morley.csv");
 
         experiments.forEach((x) => {
             x.Speed = +x.Speed;

@@ -20,12 +20,18 @@ interface HeatMapChartProps extends BaseProps, ColorProps, MarginProps {
     yBorderRadius?: number;
 }
 
-export default class HeatMap extends BaseChart<HeatMapChartProps> {
-    componentDidMount(): void {
-        this.chart = heatMap(this.chartRef);
+export default class HeatMap extends React.PureComponent<HeatMapChartProps> {
+    private setChart = (r, cg) => {
+        return heatMap(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            // @ts-ignore
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

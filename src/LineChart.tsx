@@ -1,8 +1,9 @@
 import BaseChart from "./BaseChart";
 import {CoordinateGridProps} from "./props/CoordinateGridProps";
 import {StackProps} from "./props/StackProps";
-import {lineChart} from "dc";
+import {dataCount, lineChart} from "dc";
 import {CurveFactory} from "d3-shape";
+import * as React from "react";
 
 // TODO: title in StackProps and BaseProps do not match
 // @ts-ignore
@@ -18,19 +19,28 @@ interface LineChartProps extends CoordinateGridProps, StackProps {
     xyTipsOn?: boolean;
 }
 
-export default class LineChart extends BaseChart<LineChartProps> {
-    componentDidMount(): void {
-        this.chart = lineChart(this.chartRef);
+export default class LineChart extends React.PureComponent<LineChartProps> {
+    private setChart = (r, cg) => {
+        return lineChart(r, cg);
+    };
 
-        super.componentDidMount();
-
+    private onChartMounted = (chart: any) => {
         if(this.props.stacks) {
             this.props.stacks.forEach((stack) => {
                 // @ts-ignore
-                this.chart.stack(stack.group, stack.name, stack.accessor);
+                chart.stack(stack.group, stack.name, stack.accessor);
             });
         }
+    };
 
-        this.chart.render();
+    render() {
+        return (
+            // @ts-ignore
+            <BaseChart
+                {...this.props}
+                onChartMounted={this.onChartMounted}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

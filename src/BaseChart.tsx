@@ -1,5 +1,5 @@
 import * as React from "react";
-import {AllDcCharts, BaseProps, ChartEventProps, DcReactBaseProps} from "./props/BaseProps";
+import {AllDcCharts, BaseProps, ChartEventProps} from "./props/BaseProps";
 
 /**
  * Exposes the baseMixin properties. All charts should inherit from this.
@@ -15,24 +15,20 @@ export default class BaseChart<P extends BaseProps> extends React.PureComponent<
         onZoomed: undefined
     } as ChartEventProps);
 
-    readonly DcReactBaseKeys = Object.keys({
-        getChart: undefined
-    } as DcReactBaseProps);
-
     protected chart: AllDcCharts;
     protected chartRef;
 
     componentDidMount(): void {
-        if (this.chart == null) {
-            throw new Error("Chart implementation must be defined.")
+        if(this.chart) {
+            return;
         }
 
-        const chart = this.chart;
+        this.chart = this.props.setChartRef(this.chartRef);
 
-        // @ts-ignore
-        this.props.getChart && this.props.getChart(this.chart);
+        this.refreshProps(this.chart);
+        this.props.onChartMounted && this.props.onChartMounted(this.chart);
 
-        this.refreshProps(chart);
+        this.chart.render();
     }
 
     componentWillUnmount(): void {
@@ -42,6 +38,8 @@ export default class BaseChart<P extends BaseProps> extends React.PureComponent<
             // @ts-ignore
             this.chart.on(`${transformedKey.charAt(0).toLowerCase()}${transformedKey.substring(1)}`, null);
         });
+
+        this.chart.resetSvg();
     }
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<{}>, snapshot?: any): void {
@@ -58,6 +56,10 @@ export default class BaseChart<P extends BaseProps> extends React.PureComponent<
         this.chart.redraw();
     };
 
+    /**
+     * Called to refresh the properties on the underlying chart.
+     * @param chart
+     */
     private refreshProps = (chart: AllDcCharts) => {
         Object.keys(this.props).forEach((propKey) => {
             if (this.props[propKey] == null) {
@@ -75,6 +77,10 @@ export default class BaseChart<P extends BaseProps> extends React.PureComponent<
         });
     };
 
+    /**
+     * Set the component reference.
+     * @param ref
+     */
     private setChartRef = (ref) => {
         this.chartRef = ref;
     };

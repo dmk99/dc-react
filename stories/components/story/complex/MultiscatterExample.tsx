@@ -1,12 +1,9 @@
 import * as React from "react";
 import CompositeChart from "../../../../src/CompositeChart";
 import {scaleLinear} from "d3-scale";
-import {csv} from "d3-fetch";
-import {csvParse, DSVRowArray} from "d3-dsv";
 import {Crossfilter, Dimension, Group} from "crossfilter2";
-import {legend, pluck, lineChart, scatterPlot} from "dc";
+import {legend, lineChart, scatterPlot} from "dc";
 import * as crossfilter from "crossfilter2";
-import LineChart from "../../../../src/LineChart";
 import ScatterPlot from "../../../../src/ScatterPlot";
 
 interface MultiscatterExampleState {
@@ -25,7 +22,7 @@ export default class MultiscatterExample extends React.Component<void, Multiscat
     }
 
     componentDidMount() {
-        const morley = require("./data/morley.csv");
+        const morley = require("../../../data/morley.csv");
 
         const ndx = crossfilter(morley);
         // @ts-ignore
@@ -89,9 +86,7 @@ export default class MultiscatterExample extends React.Component<void, Multiscat
                             .dimension(this.state.lineDimension)
                             .group(this.state.lineGroup, "Line Group")
                     ]}
-                >
-
-                </CompositeChart>
+                />
             </div>
         )
     }

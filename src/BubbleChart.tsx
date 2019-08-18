@@ -9,12 +9,17 @@ interface BubbleChartProps extends CoordinateGridProps, BubbleProps {
     sortBubbleSize?: boolean;
 }
 
-export default class BubbleChart extends BaseChart<BubbleChartProps> {
-    componentDidMount(): void {
-        this.chart = bubbleChart(this.chartRef);
+export default class BubbleChart extends React.PureComponent<BubbleChartProps> {
+    private setChart = (r, cg) => {
+        return bubbleChart(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }

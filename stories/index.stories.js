@@ -2,7 +2,7 @@ import React from 'react';
 
 import "dc/dc.css";
 import { storiesOf } from "@storybook/react";
-import "./components/PieChart/index.stories";
+import "./components/charts/index.stories";
 
 import { Welcome } from "@storybook/react/demo";
 import Introduction from "./components/Introduction";

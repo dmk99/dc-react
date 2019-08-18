@@ -40,7 +40,20 @@ export interface ChartEventProps {
 }
 
 export interface DcReactBaseProps {
-    getChart?: (chart: AllDcCharts) => void;
+    /**
+     * Called when a chart has been mounted.
+     * @param chart the base DC chart.
+     */
+    onChartMounted?: (chart: AllDcCharts) => void;
+
+    /**
+     * Set the chart reference and chart group if specified.
+     * And return the created chart.
+     *
+     * @param ref the react reference.
+     * @param chartGroup the name of the group.
+     */
+    setChartRef?: (ref: any, chartGroup?: string) => AllDcCharts;
 }
 
 export interface BaseProps extends ChartEventProps, DcReactBaseProps {

@@ -3,6 +3,7 @@ import {BaseProps} from "./props/BaseProps";
 // @ts-ignore
 import {cboxMenu} from "dc";
 import {SortingFunction} from "./DataTable";
+import * as React from "react";
 
 interface CboxMenuProps extends BaseProps {
     filterDisplayed?: () => boolean;
@@ -12,12 +13,17 @@ interface CboxMenuProps extends BaseProps {
     promptValue?: any;
 }
 
-export default class CboxMenu extends BaseChart<CboxMenuProps> {
-    componentDidMount(): void {
-        this.chart = cboxMenu(this.chartRef);
+export default class CboxMenu extends React.PureComponent<CboxMenuProps> {
+    private setChart = (r, cg) => {
+        return cboxMenu(r, cg);
+    };
 
-        super.componentDidMount();
-
-        this.chart.render();
+    render() {
+        return (
+            <BaseChart
+                {...this.props}
+                setChartRef={this.setChart}
+            />
+        )
     }
 }
