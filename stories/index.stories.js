@@ -14,6 +14,7 @@ import MultiscatterExample from "./components/story/complex/MultiscatterExample"
 import BoxPlotBasicExample from "./components/story/complex/BoxPlotBasicExample";
 import AreaExample from "./components/story/complex/AreaExample";
 import HtmlLegend from "./components/story/complex/HtmlLegend";
+import BridgeChartExample from "./components/story/complex/BridgeChart";
 
 storiesOf("Welcome", module).add("to dc-react", () => <Introduction/>);
 
@@ -28,5 +29,6 @@ complexCharts.add("Multi-scatter", () => (<MultiscatterExample/>));
 complexCharts.add("Box Plot Basic", () => (<BoxPlotBasicExample/>));
 complexCharts.add("Area", () => (<AreaExample/>));
 complexCharts.add("HTML Legend", () => (<HtmlLegend/>));
+complexCharts.add("Bridge Chart", () => (<BridgeChartExample/>));
 
 

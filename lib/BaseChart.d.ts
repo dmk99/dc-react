@@ -5,6 +5,7 @@ export default class BaseChart<P extends BaseProps> extends React.PureComponent<
     protected chart: AllDcCharts;
     protected chartRef: any;
     componentDidMount(): void;
+    private onChartMounted;
     componentWillUnmount(): void;
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<{}>, snapshot?: any): void;
     onComponentUpdate: () => void;

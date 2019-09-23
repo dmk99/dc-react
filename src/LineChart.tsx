@@ -24,21 +24,11 @@ export default class LineChart extends React.PureComponent<LineChartProps> {
         return lineChart(r, cg);
     };
 
-    private onChartMounted = (chart: any) => {
-        if(this.props.stacks) {
-            this.props.stacks.forEach((stack) => {
-                // @ts-ignore
-                chart.stack(stack.group, stack.name, stack.accessor);
-            });
-        }
-    };
-
     render() {
         return (
             // @ts-ignore
             <BaseChart
                 {...this.props}
-                onChartMounted={this.onChartMounted}
                 setChartRef={this.setChart}
             />
         )

@@ -1,5 +1,6 @@
 import * as React from "react";
 import {AllDcCharts, BaseProps, ChartEventProps} from "./props/BaseProps";
+import has = Reflect.has;
 
 /**
  * Exposes the baseMixin properties. All charts should inherit from this.
@@ -26,10 +27,20 @@ export default class BaseChart<P extends BaseProps> extends React.PureComponent<
         this.chart = this.props.setChartRef(this.chartRef);
 
         this.refreshProps(this.chart);
-        this.props.onChartMounted && this.props.onChartMounted(this.chart);
+        this.onChartMounted(this.chart);
 
         this.chart.render();
     }
+
+    private onChartMounted = (chart: any) => {
+		if(has(this.props, 'stacks')) {
+			this.props['stacks'].forEach((stack) => {
+				chart.stack(stack.group, stack.name, stack.accessor);
+			});
+		}
+
+		this.props.onChartMounted && this.props.onChartMounted(chart);
+	};
 
     componentWillUnmount(): void {
         this.ChartEventKeys.forEach((key) => {

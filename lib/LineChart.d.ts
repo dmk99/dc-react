@@ -15,7 +15,6 @@ interface LineChartProps extends CoordinateGridProps, StackProps {
 }
 export default class LineChart extends React.PureComponent<LineChartProps> {
     private setChart;
-    private onChartMounted;
     render(): JSX.Element;
 }
 export {};
