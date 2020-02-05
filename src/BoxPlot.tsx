@@ -1,9 +1,11 @@
 import BaseChart from "./BaseChart";
-import {boxPlot} from "dc";
+import dc, {boxPlot} from "dc";
 import {CoordinateGridProps} from "./props/CoordinateGridProps";
 import * as React from "react";
+import {BaseChartComponent, ParentType} from "./props/BaseChartComponent";
+import {BaseProps} from "./props/BaseProps";
 
-interface BoxPlotProps extends Pick<CoordinateGridProps, Exclude<keyof CoordinateGridProps, "x">> {
+interface BoxPlotProps extends Pick<CoordinateGridProps<dc.BoxPlot>, Exclude<keyof CoordinateGridProps<dc.BoxPlot>, "x">>, BaseProps<dc.BoxPlot> {
     boldOutlier?: boolean;
     boxPadding?: number;
     boxWidth?: number;
@@ -16,14 +18,15 @@ interface BoxPlotProps extends Pick<CoordinateGridProps, Exclude<keyof Coordinat
     yRangePadding?: number | (() => number);
 }
 
-export default class BoxPlot extends React.PureComponent<BoxPlotProps> {
-    private setChart = (r, cg) => {
-        return boxPlot(r, cg);
-    };
+export default class BoxPlot extends React.PureComponent<BoxPlotProps> implements BaseChartComponent<dc.BoxPlot> {
+    setChart(parent: ParentType, chartGroup?: string): dc.BoxPlot {
+        // @ts-ignore
+        return boxPlot(parent, chartGroup);
+    }
 
     render() {
         return (
-            <BaseChart
+            <BaseChart<dc.BoxPlot, BoxPlotProps>
                 {...this.props}
                 setChartRef={this.setChart}
             />

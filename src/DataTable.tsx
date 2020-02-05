@@ -1,13 +1,14 @@
 import {BaseProps} from "./props/BaseProps";
 import {Primitive} from "d3-array";
 import * as React from "react";
-import {dataTable} from "dc";
+import dc, {dataTable} from "dc";
 import BaseChart from "./BaseChart";
+import {BaseChartComponent, ParentType} from "./props/BaseChartComponent";
 
 export type DatumValueAccessor = (datum: any) => Primitive;
 export type SortingFunction = (a: Primitive | undefined, b: Primitive | undefined) => number;
 
-interface DataTableProps extends BaseProps {
+interface DataTableProps extends BaseProps<dc.DataTableWidget> {
     beginSlice?: number;
     columns?: (
         DatumValueAccessor[] |
@@ -22,11 +23,7 @@ interface DataTableProps extends BaseProps {
     sortBy?: DatumValueAccessor;
 }
 
-export default class DataTable extends React.PureComponent<DataTableProps> {
-    private setChart = (r, cg) => {
-        return dataTable(r, cg);
-    };
-
+export default class DataTable extends React.PureComponent<DataTableProps> implements BaseChartComponent<dc.DataTableWidget> {
     render() {
         return (
             // @ts-ignore
@@ -35,5 +32,10 @@ export default class DataTable extends React.PureComponent<DataTableProps> {
                 setChartRef={this.setChart}
             />
         )
+    }
+
+    setChart(parent: ParentType, chartGroup?: string): dc.DataTableWidget {
+        // @ts-ignore
+        return dataTable(parent, chartGroup);
     }
 }

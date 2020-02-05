@@ -5,7 +5,7 @@ import {csv} from "d3-fetch";
 import {csvParse, DSVRowArray} from "d3-dsv";
 import {Crossfilter, Dimension, Group} from "crossfilter2";
 import {legend, pluck, lineChart} from "dc";
-import * as crossfilter from "crossfilter2";
+import crossfilter from "crossfilter2";
 import LineChart from "../../../../src/LineChart";
 
 interface CompositeExampleState {

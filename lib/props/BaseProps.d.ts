@@ -1,6 +1,6 @@
 import { Crossfilter, Dimension, Group, GroupAll } from "crossfilter2";
-import { BarChart, BoxPlot, BubbleChart, BubbleOverlayChart, CompositeChart, DataCountWidget, DataGridWidget, DataTableWidget, Filter, GeoChoroplethChart, HeatMap, Legend, LineChart, NumberDisplayWidget, PieChart, RowChart, ScatterPlot, SelectMenu, SeriesChart } from "dc";
-export declare type AllDcCharts = DataCountWidget | DataGridWidget | DataTableWidget | NumberDisplayWidget | SelectMenu | PieChart | HeatMap | GeoChoroplethChart | RowChart | BubbleOverlayChart | BubbleChart | BoxPlot | CompositeChart | ScatterPlot | SeriesChart | BarChart | LineChart;
+import { BarChart, BoxPlot, BubbleChart, BubbleOverlayChart, CBoxMenu, CompositeChart, DataCountWidget, DataGridWidget, DataTableWidget, Filter, GeoChoroplethChart, HeatMap, Legend, LineChart, NumberDisplayWidget, PieChart, RowChart, ScatterPlot, SelectMenu, SeriesChart, SunburstChart, TextFilterWidget } from "dc";
+export declare type AllDcCharts = DataCountWidget | DataGridWidget | DataTableWidget | NumberDisplayWidget | SelectMenu | PieChart | HeatMap | GeoChoroplethChart | RowChart | BubbleOverlayChart | BubbleChart | BoxPlot | CompositeChart | ScatterPlot | SeriesChart | BarChart | LineChart | TextFilterWidget | CBoxMenu | SunburstChart;
 export declare type DatumToStringAccessor = (d: any) => string;
 export interface ChartEventProps {
     onRenderlet?: (chart: AllDcCharts, filter: any) => void;

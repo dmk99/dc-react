@@ -1,6 +1,6 @@
 import * as React from "react";
 import PieChart from "../../../../src/PieChart";
-import crossfilter = require("crossfilter2");
+import crossfilter from "crossfilter2";
 import {legend} from "dc";
 
 export default class HtmlLegend extends React.PureComponent {

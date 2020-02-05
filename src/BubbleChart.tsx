@@ -1,25 +1,28 @@
 import BaseChart from "./BaseChart";
-import {bubbleChart} from "dc";
+import dc, {bubbleChart} from "dc";
 import {CoordinateGridProps} from "./props/CoordinateGridProps";
 import * as React from "react";
 import {BubbleProps} from "./props/BubbleProps";
+import {BaseChartComponent, ParentType} from "./props/BaseChartComponent";
+import {BaseProps} from "./props/BaseProps";
 
-interface BubbleChartProps extends CoordinateGridProps, BubbleProps {
+interface BubbleChartProps extends CoordinateGridProps<dc.BubbleChart>, BubbleProps, BaseProps<dc.BubbleChart> {
     elasticRadius?: boolean;
     sortBubbleSize?: boolean;
 }
 
-export default class BubbleChart extends React.PureComponent<BubbleChartProps> {
-    private setChart = (r, cg) => {
-        return bubbleChart(r, cg);
-    };
-
+export default class BubbleChart extends React.PureComponent<BubbleChartProps> implements BaseChartComponent<dc.BubbleChart> {
     render() {
         return (
-            <BaseChart
+            <BaseChart<dc.BubbleChart, BubbleChartProps>
                 {...this.props}
                 setChartRef={this.setChart}
             />
         )
+    }
+
+    setChart(parent: ParentType, chartGroup?: string): dc.BubbleChart {
+        // @ts-ignore
+        return bubbleChart(parent, chartGroup);
     }
 }

@@ -3,7 +3,7 @@ import PieChart from "../../../../src/PieChart";
 import BarChart from "../../../../src/BarChart";
 import {scaleLinear} from "d3-scale";
 import RowChart from "../../../../src/RowChart";
-import crossfilter = require("crossfilter2");
+import crossfilter from "crossfilter2";
 
 export default class FilteringExample extends React.PureComponent {
     render() {

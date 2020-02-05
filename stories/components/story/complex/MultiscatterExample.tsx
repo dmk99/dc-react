@@ -3,7 +3,7 @@ import CompositeChart from "../../../../src/CompositeChart";
 import {scaleLinear} from "d3-scale";
 import {Crossfilter, Dimension, Group} from "crossfilter2";
 import {legend, lineChart, scatterPlot} from "dc";
-import * as crossfilter from "crossfilter2";
+import crossfilter from "crossfilter2";
 import ScatterPlot from "../../../../src/ScatterPlot";
 
 interface MultiscatterExampleState {

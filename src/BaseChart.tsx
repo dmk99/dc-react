@@ -1,10 +1,11 @@
 import * as React from "react";
 import {AllDcCharts, BaseProps, ChartEventProps} from "./props/BaseProps";
+import dc from "dc";
 
 /**
  * Exposes the baseMixin properties. All charts should inherit from this.
  */
-export default class BaseChart<P extends BaseProps> extends React.PureComponent<P> {
+export default class BaseChart<TChart extends dc.BaseMixin<any>, P extends BaseProps<TChart>> extends React.PureComponent<P> {
     readonly ChartEventKeys = Object.keys({
         onFiltered: undefined,
         onPostRender: undefined,
@@ -13,9 +14,9 @@ export default class BaseChart<P extends BaseProps> extends React.PureComponent<
         onPretransition: undefined,
         onRenderlet: undefined,
         onZoomed: undefined
-    } as ChartEventProps);
+    } as ChartEventProps<TChart>);
 
-    protected chart: AllDcCharts;
+    protected chart: TChart;
     protected chartRef;
 
     componentDidMount(): void {
@@ -60,7 +61,7 @@ export default class BaseChart<P extends BaseProps> extends React.PureComponent<
      * Called to refresh the properties on the underlying chart.
      * @param chart
      */
-    private refreshProps = (chart: AllDcCharts) => {
+    private refreshProps = (chart: TChart) => {
         Object.keys(this.props).forEach((propKey) => {
             if (this.props[propKey] == null) {
                 return;
