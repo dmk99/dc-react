@@ -4,7 +4,10 @@
 
 The goal of this library is to provide a React-styled wrapper around the great DC.js library.
 
-[![npm version](http://img.shields.io/npm/v/@david.kucsai/dc-react.svg?style=flat)](https://npmjs.org/package/@david.kucsai/dc-react "View this project on npm")
+Latest Bleeding Edge Version: [![npm version](https://img.shields.io/github/package-json/v/dmk99/dc-react/master)]()
+
+Latest Stable: [![npm version](http://img.shields.io/npm/v/@david.kucsai/dc-react.svg?style=flat)](https://npmjs.org/package/@david.kucsai/dc-react "View this project on npm")
+
 
 To get started run:
 

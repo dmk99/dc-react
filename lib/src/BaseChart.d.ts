@@ -6,7 +6,6 @@ export default class BaseChart<TChart extends dc.BaseMixin<any>, P extends BaseP
     protected chart: TChart;
     protected chartRef: any;
     componentDidMount(): void;
-    private onChartMounted;
     componentWillUnmount(): void;
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<{}>, snapshot?: any): void;
     onComponentUpdate: () => void;
