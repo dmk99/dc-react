@@ -1,11 +1,11 @@
 import * as React from "react";
-import {AllDcCharts, BaseProps, ChartEventProps} from "./props/BaseProps";
-import has = Reflect.has;
+import {BaseProps, ChartEventProps, isTwoArgs} from "./props/BaseProps";
+import dc from "dc";
 
 /**
  * Exposes the baseMixin properties. All charts should inherit from this.
  */
-export default class BaseChart<P extends BaseProps> extends React.PureComponent<P> {
+export default class BaseChart<TChart extends dc.BaseMixin<any>, P extends BaseProps<TChart>> extends React.PureComponent<P> {
     readonly ChartEventKeys = Object.keys({
         onFiltered: undefined,
         onPostRender: undefined,
@@ -14,9 +14,9 @@ export default class BaseChart<P extends BaseProps> extends React.PureComponent<
         onPretransition: undefined,
         onRenderlet: undefined,
         onZoomed: undefined
-    } as ChartEventProps);
+    } as ChartEventProps<TChart>);
 
-    protected chart: AllDcCharts;
+    protected chart: TChart;
     protected chartRef;
 
     componentDidMount(): void {
@@ -24,23 +24,13 @@ export default class BaseChart<P extends BaseProps> extends React.PureComponent<
             return;
         }
 
-        this.chart = this.props.setChartRef(this.chartRef);
+        this.chart = this.props.setChartRef(this.props.parent ?? this.chartRef, this.props.chartGroup);
 
         this.refreshProps(this.chart);
-        this.onChartMounted(this.chart);
+        this.props.onChartMounted && this.props.onChartMounted(this.chart);
 
         this.chart.render();
     }
-
-    private onChartMounted = (chart: any) => {
-		if(has(this.props, 'stacks')) {
-			this.props['stacks'].forEach((stack) => {
-				chart.stack(stack.group, stack.name, stack.accessor);
-			});
-		}
-
-		this.props.onChartMounted && this.props.onChartMounted(chart);
-	};
 
     componentWillUnmount(): void {
         this.ChartEventKeys.forEach((key) => {
@@ -71,18 +61,23 @@ export default class BaseChart<P extends BaseProps> extends React.PureComponent<
      * Called to refresh the properties on the underlying chart.
      * @param chart
      */
-    private refreshProps = (chart: AllDcCharts) => {
+    private refreshProps = (chart: TChart) => {
         Object.keys(this.props).forEach((propKey) => {
             if (this.props[propKey] == null) {
                 return;
             }
+
+            const propValue = this.props[propKey];
 
             if (this.ChartEventKeys.find(i => i === propKey)) {
                 const transformedKey = propKey.replace('on', '');
 
                 // @ts-ignore
                 this.chart.on(`${transformedKey.charAt(0).toLowerCase()}${transformedKey.substring(1)}`, this.props[propKey]);
-            } else if (chart[propKey]) {
+            } else if(isTwoArgs(propValue)) {
+                chart[propKey](propValue.first, propValue.second);
+            }
+            else if (chart[propKey]) {
                 chart[propKey](this.props[propKey]);
             }
         });

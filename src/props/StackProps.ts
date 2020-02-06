@@ -1,6 +1,7 @@
 import {Group} from "crossfilter2";
 import {DatumValueAccessor} from "../DataTable";
 import {Stack} from "d3-shape";
+import {TwoArgs} from "./BaseProps";
 
 export interface StackGroup {
     group: Group<any, any, any>;
@@ -14,10 +15,7 @@ export interface StackProps {
     hidableStacks?: boolean;
     hideStack?: string;
     showStack?: string;
-    // TODO: add stackLayout
-
-    // TODO: Handle 2 args
-    title?: string;
+    title?: string | TwoArgs<string, DatumValueAccessor>;
 
     /**
      * Provides a hook into the `stack` function call.

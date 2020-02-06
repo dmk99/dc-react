@@ -1,1 +1,1 @@
-{"version":3,"file":"BubbleProps.js","sourceRoot":"","sources":["../../src/props/BubbleProps.ts"],"names":[],"mappings":";;AAYA,SAAgB,aAAa,CAAC,KAAU;IACpC,OAAO,CAAC,cAAc,IAAI,KAAK,CAAC,IAAI,CAAC,WAAW,IAAI,KAAK,CAAC,IAAI,CAAC,oBAAoB,IAAI,KAAK,CAAC,CAAC;AAClG,CAAC;AAFD,sCAEC"}
+{"version":3,"file":"BubbleProps.js","sourceRoot":"","sources":["../../src/props/BubbleProps.ts"],"names":[],"mappings":";;AAWA,SAAgB,aAAa,CAAC,KAAU;IACpC,OAAO,CAAC,cAAc,IAAI,KAAK,CAAC,IAAI,CAAC,WAAW,IAAI,KAAK,CAAC,IAAI,CAAC,oBAAoB,IAAI,KAAK,CAAC,CAAC;AAClG,CAAC;AAFD,sCAEC"}

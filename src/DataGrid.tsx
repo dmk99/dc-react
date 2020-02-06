@@ -1,10 +1,11 @@
 import BaseChart from "./BaseChart";
 import {BaseProps} from "./props/BaseProps";
-import {dataGrid} from "dc";
+import dc, {dataGrid} from "dc";
 import {DatumValueAccessor, SortingFunction} from "./DataTable";
 import * as React from "react";
+import {BaseChartComponent, ParentType} from "./props/BaseChartComponent";
 
-interface DataGridProps extends BaseProps {
+interface DataGridProps extends BaseProps<dc.DataGridWidget> {
     beginSlice?: number;
     endSlice?: number;
     html?: (datum: any) => string;
@@ -15,10 +16,11 @@ interface DataGridProps extends BaseProps {
     sortBy?: DatumValueAccessor;
 }
 
-export default class DataGrid extends React.PureComponent<DataGridProps> {
-    private setChart = (r, cg) => {
-        return dataGrid(r, cg);
-    };
+export default class DataGrid extends React.PureComponent<DataGridProps> implements BaseChartComponent<dc.DataGridWidget> {
+    setChart(parent: ParentType, chartGroup?: string): dc.DataGridWidget {
+        // @ts-ignore
+        return dataGrid(parent, chartGroup);
+    }
 
     render() {
         return (

@@ -1,12 +1,13 @@
 import BaseChart from "./BaseChart";
 import {CoordinateGridProps} from "./props/CoordinateGridProps";
 import {StackProps} from "./props/StackProps";
-import {barChart} from "dc";
+import dc, {barChart} from "dc";
 import * as React from "react";
+import {BaseChartComponent, ParentType} from "./props/BaseChartComponent";
 
 // TODO: title in StackProps and BaseProps do not match
 // @ts-ignore
-interface BarChartProps extends CoordinateGridProps, StackProps {
+interface BarChartProps extends CoordinateGridProps<dc.BarChart>, StackProps {
     alwaysUseRounding?: boolean;
     barPadding?: number;
     centerBar?: boolean;
@@ -14,17 +15,18 @@ interface BarChartProps extends CoordinateGridProps, StackProps {
     outerPadding?: number;
 }
 
-export default class BarChart extends React.PureComponent<BarChartProps> {
-    private setChart = (r, cg) => {
-        return barChart(r, cg);
-    };
-
+export default class BarChart extends React.PureComponent<BarChartProps> implements BaseChartComponent<dc.BarChart> {
     render() {
         return (
-            <BaseChart
+            <BaseChart<dc.BarChart, BarChartProps>
                 {...this.props}
                 setChartRef={this.setChart}
             />
         )
+    }
+
+    setChart(parent: ParentType, chartGroup?: string): dc.BarChart {
+        // @ts-ignore
+        return barChart(parent, chartGroup);
     }
 }

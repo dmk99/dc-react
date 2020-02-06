@@ -1,6 +1,6 @@
 import * as React from "react";
 import {SimplePlayers} from "../../../data/Players";
-import * as crossfilter from "crossfilter2";
+import crossfilter from "crossfilter2";
 import LineChart from "../../../../src/LineChart";
 import {scaleLinear, scaleTime} from "d3-scale";
 import DataCount from "../../../../src/DataCount";

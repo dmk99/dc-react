@@ -4,7 +4,10 @@
 
 The goal of this library is to provide a React-styled wrapper around the great DC.js library.
 
-[![npm version](http://img.shields.io/npm/v/@david.kucsai/dc-react.svg?style=flat)](https://npmjs.org/package/@david.kucsai/dc-react "View this project on npm")
+Latest Bleeding Edge Version: [![npm version](https://img.shields.io/github/package-json/v/dmk99/dc-react/master)]()
+
+Latest Stable: [![npm version](http://img.shields.io/npm/v/@david.kucsai/dc-react.svg?style=flat)](https://npmjs.org/package/@david.kucsai/dc-react "View this project on npm")
+
 
 To get started run:
 
@@ -15,13 +18,16 @@ npm install @david.kucsai/dc-react
 You will need:
 
 ```
-    "crossfilter2": "^1.4.7",
-    "dc": "^3.1.0"
+    "crossfilter2": "^1.5.2",
+    "dc": "4.0.0"
 ```
 
 ## Documentation
 
 ### Notes
+
+- The beta channel is available under version: 0.2.1-alpha.0
+    - The storybook uses this version.
 
 - Refer to [DC.js documentation](http://dc-js.github.io/dc.js/docs/html/index.html) for the associated properties on most of the charts.
     - Generally properties will have the same name as the original documentation.
@@ -39,8 +45,20 @@ You will need:
         
         - `onChartMounted: (chart: AllDcCharts) => void`
             - Called when the chart is mounted. The `chart` parameter is underlying DC chart implementation. This can be used to call methods directly on the chart.
-        - `setChartRef: (ref: any, chartGroup?: string) => AllDcCharts`
+        - `setChartRef: (ref: React.Ref | string | Node | Selection<any, any, any, any>, chartGroup?: string) => AllDcCharts`
             - Called to create the underlying DC chart. `ref` corresponds to the parent.
+            - If the `ref` is provided as a string, existing node or d3 selection then this will override the React ref.
+            - If it's not provided then the `ref` will be set to a `div` internal to the chart.
+        - For properties that may require two arguments they will be able to use `TwoArgs<TFirst, TSecond>` with the corresponding structure: 
+        
+            ```json
+              {
+                "first": "<first value as TFirst>",
+                "second": "<second value as TSecond>"
+              } 
+            ```  
+          - If you only want to provide one value you can just provide that without wrapping it.
+        - For close to one-to-one recreation of the dc.js homepage Nasdaq example please refer to the Storybook > Complex Charts > Stock
         
 
 ### Status

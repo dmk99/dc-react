@@ -1,19 +1,21 @@
 import BaseChart from "./BaseChart";
 import {BaseProps} from "./props/BaseProps";
 // @ts-ignore
-import {textFilterWidget} from "dc";
+import dc, {textFilterWidget} from "dc";
 import * as React from "react";
+import {BaseChartComponent, ParentType} from "./props/BaseChartComponent";
 
-interface TextFilterWidgetProps extends BaseProps {
+interface TextFilterWidgetProps extends BaseProps<dc.TextFilterWidget> {
     filterFunctionFactory?: (query: string) => (data: string) => void;
     normalize?: (s: string) => string;
     placeHolder?: string;
 }
 
-export default class TextFilterWidget extends React.PureComponent<TextFilterWidgetProps> {
-    private setChart = (r, cg) => {
-        return textFilterWidget(r, cg);
-    };
+export default class TextFilterWidget extends React.PureComponent<TextFilterWidgetProps> implements BaseChartComponent<dc.TextFilterWidget> {
+    setChart(parent: ParentType, chartGroup?: string): dc.TextFilterWidget {
+        // @ts-ignore
+        return textFilterWidget(parent, chartGroup);
+    }
 
     render() {
         return (

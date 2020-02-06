@@ -1,13 +1,14 @@
 import BaseChart from "./BaseChart";
-import {rowChart, Scale} from "dc";
+import dc, {rowChart, Scale} from "dc";
 import {MarginProps} from "./props/MarginProps";
 import {CapProps} from "./props/CapProps";
 import {ColorProps} from "./props/ColorProps";
 import {BaseProps} from "./props/BaseProps";
 import {Axis} from "d3-axis";
 import * as React from "react";
+import {BaseChartComponent, ParentType} from "./props/BaseChartComponent";
 
-interface RowChartProps extends CapProps, MarginProps, ColorProps, BaseProps {
+interface RowChartProps extends CapProps, MarginProps, ColorProps, BaseProps<dc.RowChart> {
     elasticX?: boolean;
     fixedBarHeight?: boolean | number;
     gap?: number;
@@ -20,11 +21,7 @@ interface RowChartProps extends CapProps, MarginProps, ColorProps, BaseProps {
     xAxis?: Axis<any>;
 }
 
-export default class RowChart extends React.PureComponent<RowChartProps> {
-    private setChart = (r, cg) => {
-        return rowChart(r, cg);
-    };
-
+export default class RowChart extends React.PureComponent<RowChartProps> implements BaseChartComponent<dc.RowChart> {
     render() {
         return (
             // @ts-ignore
@@ -33,5 +30,10 @@ export default class RowChart extends React.PureComponent<RowChartProps> {
                 setChartRef={this.setChart}
             />
         )
+    }
+
+    setChart(parent: ParentType, chartGroup?: string): dc.RowChart {
+        // @ts-ignore
+        return rowChart(parent, chartGroup);
     }
 }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import PieChart from "../../../../src/PieChart";
 import {SimplePlayers} from "../../../data/Players";
-import * as crossfilter from "crossfilter2";
+import crossfilter from "crossfilter2";
 
 export default class PieChartExample extends React.PureComponent {
     render() {

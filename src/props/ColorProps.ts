@@ -7,6 +7,6 @@ export interface ColorProps {
     // colorCalculator?: (datum: any) => ColorMixin;
     colorDomain?: string[];
     colors?: string[] | Scale<string | Color> | string;
-    getColor?: (datum: any, index: number) => string;
+    getColor?: (datum: any, index?: number) => string;
     ordinalColors?: string[];
 }

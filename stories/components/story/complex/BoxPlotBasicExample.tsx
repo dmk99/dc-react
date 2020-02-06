@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Crossfilter, Dimension, Group} from "crossfilter2";
-import * as crossfilter from "crossfilter2";
+import crossfilter from "crossfilter2";
 import BoxPlot from "../../../../src/BoxPlot";
 import PieChart from "../../../../src/PieChart";
 import {bisectLeft} from "d3-array";

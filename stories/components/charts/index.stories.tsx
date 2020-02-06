@@ -1,5 +1,5 @@
 import {storiesOf} from "@storybook/react";
-import * as crossfilter from "crossfilter2";
+import crossfilter from "crossfilter2";
 import {SimplePlayers} from "../../data/Players";
 import PieChart from "../../../src/PieChart";
 import * as React from "react";

@@ -3,7 +3,7 @@ import {
     BarChart,
     BoxPlot,
     BubbleChart,
-    BubbleOverlayChart,
+    BubbleOverlayChart, CBoxMenu,
     CompositeChart,
     DataCountWidget,
     DataGridWidget,
@@ -18,33 +18,34 @@ import {
     RowChart,
     ScatterPlot,
     SelectMenu,
-    SeriesChart
+    SeriesChart, SunburstChart, TextFilterWidget
 } from "dc";
+import {ParentType} from "./BaseChartComponent";
 
 export type AllDcCharts =
     DataCountWidget | DataGridWidget | DataTableWidget | NumberDisplayWidget | SelectMenu |
     PieChart | HeatMap | GeoChoroplethChart | RowChart | BubbleOverlayChart |
     BubbleChart | BoxPlot | CompositeChart | ScatterPlot |
-    SeriesChart | BarChart | LineChart;
+    SeriesChart | BarChart | LineChart | TextFilterWidget | CBoxMenu | SunburstChart;
 
 export type DatumToStringAccessor = (d: any) => string;
 
-export interface ChartEventProps {
-    onRenderlet?: (chart: AllDcCharts, filter: any) => void;
-    onPretransition?: (chart: AllDcCharts, filter: any) => void;
-    onPreRender?: (chart: AllDcCharts) => void;
-    onPostRender?: (chart: AllDcCharts) => void;
-    onPreRedraw?: (chart: AllDcCharts) => void;
-    onFiltered?: (chart: AllDcCharts, filter: any) => void;
-    onZoomed?: (chart: AllDcCharts, filter: any) => void;
+export interface ChartEventProps<TChart> {
+    onRenderlet?: (chart: TChart, filter: any) => void;
+    onPretransition?: (chart: TChart, filter: any) => void;
+    onPreRender?: (chart: TChart) => void;
+    onPostRender?: (chart: TChart) => void;
+    onPreRedraw?: (chart: TChart) => void;
+    onFiltered?: (chart: TChart, filter: any) => void;
+    onZoomed?: (chart: TChart, filter: any) => void;
 }
 
-export interface DcReactBaseProps {
+export interface DcReactBaseProps<TChart> {
     /**
      * Called when a chart has been mounted.
      * @param chart the base DC chart.
      */
-    onChartMounted?: (chart: AllDcCharts) => void;
+    onChartMounted?: (chart: TChart) => void;
 
     /**
      * Set the chart reference and chart group if specified.
@@ -53,10 +54,34 @@ export interface DcReactBaseProps {
      * @param ref the react reference.
      * @param chartGroup the name of the group.
      */
-    setChartRef?: (ref: any, chartGroup?: string) => AllDcCharts;
+    setChartRef?: (ref: ParentType, chartGroup?: string) => TChart;
 }
 
-export interface BaseProps extends ChartEventProps, DcReactBaseProps {
+/**
+ * A generic type meant to help defining properties that may be able to take two
+ * arguments.
+ */
+export interface TwoArgs<TArg1, TArg2> {
+    /**
+     * The first argument.
+     */
+    first?: TArg1;
+
+    /**
+     * The second argument.
+     */
+    second?: TArg2;
+}
+
+/**
+ * A typeguard to validate whether something is a TwoArgs.
+ * @param v the value to check.
+ */
+export function isTwoArgs(v: any): v is TwoArgs<any, any> {
+    return (v as TwoArgs<any, any>).first !== undefined;
+}
+
+export interface BaseProps<TChart> extends ChartEventProps<TChart>, DcReactBaseProps<TChart> {
     crossfilter?: Crossfilter<any>;
     groupAll?: GroupAll<any, any>;
 
@@ -74,14 +99,13 @@ export interface BaseProps extends ChartEventProps, DcReactBaseProps {
 
     filterPrinterFunction?: (filters: any[]) => string;
 
-    group: Group<any, any, any>;
+    group?: Group<any, any, any> | TwoArgs<Group<any, any, any>, string>;
     hasFilterHandler?: (filters: any[], filter: any) => boolean;
 
     height?: number;
     keyAccessor?: (d: Group<any, any, any>) => string | number;
 
-    // TODO: This has two arguments
-    label?: DatumToStringAccessor;
+    label?: DatumToStringAccessor | TwoArgs<DatumToStringAccessor, boolean>;
 
     legend?: Legend;
     minHeight?: number;
@@ -91,7 +115,7 @@ export interface BaseProps extends ChartEventProps, DcReactBaseProps {
     ordering?: (datum: any) => string | number;
     removeFilterHandler?: (filters: any[], filter: any) => any[];
     renderLabel?: boolean;
-    renderlet?: (chart: AllDcCharts) => void;
+    renderlet?: (chart: TChart) => void;
     renderTitle?: boolean;
     replaceFilter?: any;
     resetFilterHandler?: (filters: any[]) => any[];
@@ -108,4 +132,9 @@ export interface BaseProps extends ChartEventProps, DcReactBaseProps {
     valueAccessor?: (d: any) => string | number;
 
     width?: number;
+
+    /**
+     * An optional parent. If the parent is not supplied then the chart component will handle the parent reference.
+     */
+    parent?: ParentType;
 }

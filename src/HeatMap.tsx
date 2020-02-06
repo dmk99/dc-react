@@ -1,12 +1,13 @@
 import BaseChart from "./BaseChart";
-import {heatMap} from "dc";
+import dc, {heatMap} from "dc";
 import * as React from "react";
 import {BaseProps} from "./props/BaseProps";
 import {ColorProps} from "./props/ColorProps";
 import {MarginProps} from "./props/MarginProps";
 import {SortingFunction} from "./DataTable";
+import {BaseChartComponent, ParentType} from "./props/BaseChartComponent";
 
-interface HeatMapChartProps extends BaseProps, ColorProps, MarginProps {
+interface HeatMapChartProps extends BaseProps<dc.HeatMap>, ColorProps, MarginProps {
     handler?: (d: any) => void;
     colOrdering?: SortingFunction;
     cols?: (string | number)[];
@@ -20,11 +21,11 @@ interface HeatMapChartProps extends BaseProps, ColorProps, MarginProps {
     yBorderRadius?: number;
 }
 
-export default class HeatMap extends React.PureComponent<HeatMapChartProps> {
-    private setChart = (r, cg) => {
-        return heatMap(r, cg);
-    };
-
+export default class HeatMap extends React.PureComponent<HeatMapChartProps> implements BaseChartComponent<dc.HeatMap> {
+    setChart(parent: ParentType, chartGroup?: string): dc.HeatMap {
+        // @ts-ignore
+        return heatMap(parent, chartGroup);
+    }
     render() {
         return (
             // @ts-ignore

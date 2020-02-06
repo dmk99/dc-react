@@ -5,8 +5,9 @@ import {Axis} from "d3-axis";
 import * as React from "react";
 import {AllDcCharts} from "./props/BaseProps";
 import dc = require("dc");
+import {BaseChartComponent} from "./props/BaseChartComponent";
 
-export interface CompositeChartProps extends Pick<CoordinateGridProps, Exclude<keyof CoordinateGridProps, "group" | "dimension">> {
+export interface CompositeChartProps extends Pick<CoordinateGridProps<dc.CompositeChart>, Exclude<keyof CoordinateGridProps<dc.CompositeChart>, "group" | "dimension">> {
     alignYAxes?: boolean;
     childOptions?: any;
     rightY?: Scale<any>;
@@ -19,10 +20,10 @@ export interface CompositeChartProps extends Pick<CoordinateGridProps, Exclude<k
     charts: (parentChart: any) => AllDcCharts[];
 }
 
-export default class CompositeChart extends React.PureComponent<CompositeChartProps> {
-    private setChart = (r, cg) => {
-        return compositeChart(r, cg);
-    };
+export default class CompositeChart extends React.PureComponent<CompositeChartProps> implements BaseChartComponent<dc.CompositeChart> {
+    setChart(parent: any, chartGroup?: string): dc.CompositeChart {
+        return compositeChart(parent, chartGroup);
+    }
 
     private onChartMounted = (chart: any) => {
         console.log(chart);
