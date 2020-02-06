@@ -23,6 +23,9 @@ You will need:
 
 ### Notes
 
+- The beta channel is available under version: 0.2.0~beta.0
+    - The storybook uses this version.
+
 - Refer to [DC.js documentation](http://dc-js.github.io/dc.js/docs/html/index.html) for the associated properties on most of the charts.
     - Generally properties will have the same name as the original documentation.
     - There are a few extra properties which have been added that hook into underlying DC.js properties. These are the following (which can be found in `src/props/BaseProps.ts`)
