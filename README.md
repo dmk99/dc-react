@@ -23,7 +23,7 @@ You will need:
 
 ### Notes
 
-- The beta channel is available under version: 0.2.0~beta.0
+- The beta channel is available under version: 0.2.1-alpha.0
     - The storybook uses this version.
 
 - Refer to [DC.js documentation](http://dc-js.github.io/dc.js/docs/html/index.html) for the associated properties on most of the charts.
