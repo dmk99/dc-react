@@ -16,6 +16,11 @@ export interface DcReactBaseProps<TChart> {
     onChartMounted?: (chart: TChart) => void;
     setChartRef?: (ref: ParentType, chartGroup?: string) => TChart;
 }
+export interface TwoArgs<TArg1, TArg2> {
+    first?: TArg1;
+    second?: TArg2;
+}
+export declare function isTwoArgs(v: any): v is TwoArgs<any, any>;
 export interface BaseProps<TChart> extends ChartEventProps<TChart>, DcReactBaseProps<TChart> {
     crossfilter?: Crossfilter<any>;
     groupAll?: GroupAll<any, any>;
@@ -28,11 +33,11 @@ export interface BaseProps<TChart> extends ChartEventProps<TChart>, DcReactBaseP
     filter?: any;
     filterHandler?: (dimension: Dimension<any, any>, filter: any) => any;
     filterPrinterFunction?: (filters: any[]) => string;
-    group: Group<any, any, any>;
+    group?: Group<any, any, any> | TwoArgs<Group<any, any, any>, string>;
     hasFilterHandler?: (filters: any[], filter: any) => boolean;
     height?: number;
     keyAccessor?: (d: Group<any, any, any>) => string | number;
-    label?: DatumToStringAccessor;
+    label?: DatumToStringAccessor | TwoArgs<DatumToStringAccessor, boolean>;
     legend?: Legend;
     minHeight?: number;
     minWidth?: number;
