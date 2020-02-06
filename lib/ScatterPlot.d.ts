@@ -1,9 +1,10 @@
-import { Scale } from "dc";
+import dc, { Scale } from "dc";
 import { CoordinateGridProps } from "./props/CoordinateGridProps";
 import * as React from "react";
 import { SymbolType } from "d3-shape";
 import { DatumValueAccessor } from "./DataTable";
-interface ScatterPlotProps extends CoordinateGridProps {
+import { BaseChartComponent, ParentType } from "./props/BaseChartComponent";
+interface ScatterPlotProps extends CoordinateGridProps<dc.ScatterPlot> {
     emptyColor?: Scale<any>;
     emptyOpacity?: number;
     nonemptyOpacity?: number;
@@ -17,8 +18,8 @@ interface ScatterPlotProps extends CoordinateGridProps {
     symbol?: SymbolType;
     symbolSize?: number;
 }
-export default class ScatterPlot extends React.PureComponent<ScatterPlotProps> {
-    private setChart;
+export default class ScatterPlot extends React.PureComponent<ScatterPlotProps> implements BaseChartComponent<dc.ScatterPlot> {
+    setChart(parent: ParentType, chartGroup?: string): dc.ScatterPlot;
     render(): JSX.Element;
 }
 export {};

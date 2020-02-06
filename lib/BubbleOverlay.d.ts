@@ -1,10 +1,12 @@
+import dc from "dc";
 import * as React from "react";
 import { BubbleProps } from "./props/BubbleProps";
 import { BaseProps } from "./props/BaseProps";
-interface BubbleOverlayProps extends BaseProps, BubbleProps {
+import { BaseChartComponent, ParentType } from "./props/BaseChartComponent";
+interface BubbleOverlayProps extends BaseProps<dc.BubbleOverlayChart>, BubbleProps {
 }
-export default class BubbleChart extends React.PureComponent<BubbleOverlayProps> {
-    private setChart;
+export default class BubbleChart extends React.PureComponent<BubbleOverlayProps> implements BaseChartComponent<dc.BubbleOverlayChart> {
     render(): JSX.Element;
+    setChart(parent: ParentType, chartGroup?: string): dc.BubbleOverlayChart;
 }
 export {};

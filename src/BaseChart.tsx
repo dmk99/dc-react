@@ -1,5 +1,5 @@
 import * as React from "react";
-import {AllDcCharts, BaseProps, ChartEventProps} from "./props/BaseProps";
+import {BaseProps, ChartEventProps, isTwoArgs} from "./props/BaseProps";
 import dc from "dc";
 
 /**
@@ -24,7 +24,7 @@ export default class BaseChart<TChart extends dc.BaseMixin<any>, P extends BaseP
             return;
         }
 
-        this.chart = this.props.setChartRef(this.chartRef);
+        this.chart = this.props.setChartRef(this.props.parent ?? this.chartRef, this.props.chartGroup);
 
         this.refreshProps(this.chart);
         this.props.onChartMounted && this.props.onChartMounted(this.chart);
@@ -67,12 +67,17 @@ export default class BaseChart<TChart extends dc.BaseMixin<any>, P extends BaseP
                 return;
             }
 
+            const propValue = this.props[propKey];
+
             if (this.ChartEventKeys.find(i => i === propKey)) {
                 const transformedKey = propKey.replace('on', '');
 
                 // @ts-ignore
                 this.chart.on(`${transformedKey.charAt(0).toLowerCase()}${transformedKey.substring(1)}`, this.props[propKey]);
-            } else if (chart[propKey]) {
+            } else if(isTwoArgs(propValue)) {
+                chart[propKey](propValue.first, propValue.second);
+            }
+            else if (chart[propKey]) {
                 chart[propKey](this.props[propKey]);
             }
         });

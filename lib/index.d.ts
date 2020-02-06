@@ -19,6 +19,7 @@ export * from "./SelectMenu";
 export * from "./SeriesChart";
 export * from "./SunburstChart";
 export * from "./TextFilterWidget";
+export * from "./props/BaseChartComponent";
 export * from "./props/BaseProps";
 export * from "./props/BubbleProps";
 export * from "./props/CapProps";

@@ -3,7 +3,9 @@ import { CoordinateGridProps } from "./props/CoordinateGridProps";
 import { Axis } from "d3-axis";
 import * as React from "react";
 import { AllDcCharts } from "./props/BaseProps";
-export interface CompositeChartProps extends Pick<CoordinateGridProps, Exclude<keyof CoordinateGridProps, "group" | "dimension">> {
+import dc = require("dc");
+import { BaseChartComponent } from "./props/BaseChartComponent";
+export interface CompositeChartProps extends Pick<CoordinateGridProps<dc.CompositeChart>, Exclude<keyof CoordinateGridProps<dc.CompositeChart>, "group" | "dimension">> {
     alignYAxes?: boolean;
     childOptions?: any;
     rightY?: Scale<any>;
@@ -14,8 +16,8 @@ export interface CompositeChartProps extends Pick<CoordinateGridProps, Exclude<k
     useRightAxisGridLines?: boolean;
     charts: (parentChart: any) => AllDcCharts[];
 }
-export default class CompositeChart extends React.PureComponent<CompositeChartProps> {
-    private setChart;
+export default class CompositeChart extends React.PureComponent<CompositeChartProps> implements BaseChartComponent<dc.CompositeChart> {
+    setChart(parent: any, chartGroup?: string): dc.CompositeChart;
     private onChartMounted;
     render(): JSX.Element;
 }

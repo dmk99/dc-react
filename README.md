@@ -15,8 +15,8 @@ npm install @david.kucsai/dc-react
 You will need:
 
 ```
-    "crossfilter2": "^1.4.7",
-    "dc": "^3.1.0"
+    "crossfilter2": "^1.5.2",
+    "dc": "4.0.0"
 ```
 
 ## Documentation
@@ -39,8 +39,20 @@ You will need:
         
         - `onChartMounted: (chart: AllDcCharts) => void`
             - Called when the chart is mounted. The `chart` parameter is underlying DC chart implementation. This can be used to call methods directly on the chart.
-        - `setChartRef: (ref: any, chartGroup?: string) => AllDcCharts`
+        - `setChartRef: (ref: React.Ref | string | Node | Selection<any, any, any, any>, chartGroup?: string) => AllDcCharts`
             - Called to create the underlying DC chart. `ref` corresponds to the parent.
+            - If the `ref` is provided as a string, existing node or d3 selection then this will override the React ref.
+            - If it's not provided then the `ref` will be set to a `div` internal to the chart.
+        - For properties that may require two arguments they will be able to use `TwoArgs<TFirst, TSecond>` with the corresponding structure: 
+        
+            ```json
+              {
+                "first": "<first value as TFirst>",
+                "second": "<second value as TSecond>"
+              } 
+            ```  
+          - If you only want to provide one value you can just provide that without wrapping it.
+        - For close to one-to-one recreation of the dc.js homepage Nasdaq example please refer to the Storybook > Complex Charts > Stock
         
 
 ### Status

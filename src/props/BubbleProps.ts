@@ -1,13 +1,12 @@
 import {Scale} from "dc";
+import {DatumValueAccessor} from "../DataTable";
 
 export interface BubbleProps {
     maxBubbleRelativeSize?: number;
     minRadius?: number;
     minRadiusWithLabel?: number;
     r?: Scale<any>;
-
-    // TODO: Implement radiusValueAccessor
-    // radiusValueAccessor?:
+    radiusValueAccessor?: DatumValueAccessor;
 }
 
 export function isBubbleProps(props: any): props is BubbleProps {

@@ -1,10 +1,12 @@
+import dc from "dc";
 import * as React from "react";
 import { BaseProps } from "./props/BaseProps";
 import { ColorProps } from "./props/ColorProps";
-interface GeoChoroplethChartProps extends BaseProps, ColorProps {
+import { BaseChartComponent, ParentType } from "./props/BaseChartComponent";
+interface GeoChoroplethChartProps extends BaseProps<dc.GeoChoroplethChart>, ColorProps {
 }
-export default class GeoChoroplethChart extends React.PureComponent<GeoChoroplethChartProps> {
-    private setChart;
+export default class GeoChoroplethChart extends React.PureComponent<GeoChoroplethChartProps> implements BaseChartComponent<dc.GeoChoroplethChart> {
+    setChart(parent: ParentType, chartGroup?: string): dc.GeoChoroplethChart;
     render(): JSX.Element;
 }
 export {};

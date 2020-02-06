@@ -1,5 +1,8 @@
 import {addDecorator, addParameters, configure} from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
+import "../stories/styles.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 addDecorator(withInfo);
 

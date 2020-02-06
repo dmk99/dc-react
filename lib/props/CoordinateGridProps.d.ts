@@ -4,7 +4,7 @@ import { AllDcCharts, BaseProps } from "./BaseProps";
 import { Scale } from "dc";
 import { BrushBehavior } from "d3-brush";
 import { Axis } from "d3-axis";
-export interface CoordinateGridProps extends ColorProps, MarginProps, BaseProps {
+export interface CoordinateGridProps<TChart> extends ColorProps, MarginProps, BaseProps<TChart> {
     brush?: BrushBehavior<any>;
     brushOn?: boolean;
     clipPadding?: number;

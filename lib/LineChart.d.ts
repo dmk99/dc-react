@@ -1,8 +1,9 @@
 import { CoordinateGridProps } from "./props/CoordinateGridProps";
 import { StackProps } from "./props/StackProps";
+import dc from "dc";
 import { CurveFactory } from "d3-shape";
 import * as React from "react";
-interface LineChartProps extends CoordinateGridProps, StackProps {
+interface LineChartProps extends CoordinateGridProps<dc.LineChart>, StackProps {
     curve?: CurveFactory;
     dashStyle?: number[];
     defined?: () => boolean;
